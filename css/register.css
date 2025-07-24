@@ -1,0 +1,466 @@
+@keyframes floatAnimation
+{
+    0%
+    {
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(-10px);
+    }
+    100%
+    {
+        transform: translateY(0);
+    }
+}
+:root {
+    --primary: #4361ee;
+    --primary-dark: #2980b9;
+    --secondary: #2ecc71;
+    --danger: #e74c3c;
+    --warning: #f39c12;
+    --light: #f8f9fa;
+    --dark: #2c3e50;
+    --gray: #95a5a6;
+    --light-gray: #ecf0f1;
+    --white: #ffffff;
+    --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body.register-page {
+    background-color: var(--light-gray);
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+.register-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.register-illustration {
+    flex: 1;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    padding: 3rem;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    margin-top: -50%;
+    margin-right: 52%;
+    position: fixed;
+    animation: floatAnimation 3s ease-in-out infinite;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    border-radius: 15px;
+}
+
+
+
+.register-illustration img {
+    max-width: 80%;
+    margin-bottom: 2rem;
+}
+
+.illustration-text {
+    text-align: center;
+    max-width: 500px;
+}
+
+.illustration-text h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.illustration-text p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.register-container {
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+}
+
+.register-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.register-header .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.register-header .logo i {
+    margin-right: 10px;
+    font-size: 1.5em;
+}
+
+.register-header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+}
+
+.register-header p {
+    color: var(--gray);
+    font-size: 0.95rem;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-icon i:first-child {
+    position: absolute;
+    left: 1rem;
+    color: var(--gray);
+}
+
+.input-with-icon input,
+.input-with-icon select {
+    width: 100%;
+    padding: 0.9rem 1rem 0.9rem 2.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    appearance: none;
+    background-color: var(--white);
+}
+
+.input-with-icon select {
+    cursor: pointer;
+}
+
+.input-with-icon input:focus,
+.input-with-icon select:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.toggle-password {
+    position: absolute;
+    right: 1rem;
+    color: var(--gray);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.toggle-password:hover {
+    color: var(--primary);
+}
+
+.password-strength {
+    margin-top: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.strength-bar {
+    flex: 1;
+    height: 4px;
+    background-color: var(--light-gray);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.strength-bar::after {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 0%;
+    background-color: var(--danger);
+    transition: width 0.3s, background-color 0.3s;
+}
+
+.strength-text {
+    font-size: 0.75rem;
+    color: var(--gray);
+}
+
+.terms-group {
+    margin-top: 1rem;
+}
+
+.terms-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.terms-label input {
+    margin-top: 0.2rem;
+    accent-color: var(--primary);
+}
+
+.terms-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.terms-link:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.btn-text {
+    display: block;
+}
+
+.btn-loader {
+    display: none;
+}
+
+.btn.loading .btn-text {
+    display: none;
+}
+
+.btn.loading .btn-loader {
+    display: block;
+}
+
+.register-divider {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.register-divider::before,
+.register-divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+}
+
+.register-divider::before {
+    margin-right: 1rem;
+}
+
+.register-divider::after {
+    margin-left: 1rem;
+}
+
+.social-register {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.social-register p {
+    margin-bottom: 1rem;
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn-social {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.btn-social:hover {
+    transform: translateY(-3px);
+}
+
+.btn-social.google {
+    background-color: #db4437;
+}
+
+.btn-social.microsoft {
+    background-color: #4361ee;
+}
+
+.btn-social.apple {
+    background-color: #000000;
+}
+
+.register-footer {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+.register-footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.register-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Indicateur de force du mot de passe */
+.password-weak .strength-bar::after {
+    width: 25%;
+    background-color: var(--danger);
+}
+
+.password-medium .strength-bar::after {
+    width: 50%;
+    background-color: var(--warning);
+}
+
+.password-strong .strength-bar::after {
+    width: 75%;
+    background-color: var(--secondary);
+}
+
+.password-very-strong .strength-bar::after {
+    width: 100%;
+    background-color: var(--secondary);
+}
+
+.password-weak .strength-text {
+    color: var(--danger);
+}
+
+.password-medium .strength-text {
+    color: var(--warning);
+}
+
+.password-strong .strength-text,
+.password-very-strong .strength-text {
+    color: var(--secondary);
+}
+
+/* Désactivation du fond jaune sur l'autofill */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px var(--white) inset !important;
+    -webkit-text-fill-color: var(--dark) !important;
+}
+
+/* Responsive Design */
+@media (min-width: 992px) {
+    .register-illustration {
+        display: flex;
+    }
+    
+    .register-wrapper {
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+    }
+    
+    .register-container {
+        margin: 0;
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .register-container {
+        padding: 1.5rem;
+    }
+    
+    .register-header h1 {
+        font-size: 1.3rem;
+    }
+    
+    .input-with-icon input,
+    .input-with-icon select {
+        padding: 0.8rem 1rem 0.8rem 2.5rem;
+    }
+}

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediSchedule - Appointments</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style2.css"><style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f7fa;
+            margin: 0;
+            color: #222;
+        }
+   
+      
+        .main-content {
+            margin-left: 240px;
+            padding: 40px 32px;
+            min-height: 100vh;
+        }
+        .section-title {
+            font-size: 2em;
+            font-weight: 600;
+            margin-bottom: 32px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            margin-right: 14px;
+            color: #3498db;
+        }
+        .appointment-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+        .appointment-tab {
+            padding: 12px 32px;
+            background: #fff;
+            border-radius: 24px 24px 0 0;
+            font-weight: 500;
+            color: #3498db;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(44,62,80,0.05);
+            border: none;
+            outline: none;
+            transition: background 0.18s, color 0.18s;
+        }
+        .appointment-tab.active {
+            background: #3498db;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(52,152,219,0.12);
+        }
+        .appointment-list {
+            display: grid;
+            gap: 24px;
+        }
+        .appointment-card {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(44,62,80,0.08);
+            padding: 24px;
+            transition: box-shadow 0.18s;
+        }
+        .appointment-card:hover {
+            box-shadow: 0 6px 24px rgba(52,152,219,0.13);
+        }
+        .doctor-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 32px;
+            border: 3px solid #3498db;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.09);
+        }
+        .appointment-info {
+            flex: 1;
+        }
+        .appointment-info h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.25em;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        .appointment-info p {
+            margin: 0 0 12px 0;
+            color: #555;
+            font-size: 1em;
+        }
+        .appointment-status {
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 12px;
+            font-size: 0.95em;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .status-confirmed {
+            background: #eafaf1;
+            color: #27ae60;
+            border: 1px solid #27ae60;
+        }
+        .status-pending {
+            background: #fffbe6;
+            color: #f39c12;
+            border: 1px solid #f39c12;
+        }
+        .status-cancelled {
+            background: #fdeaea;
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+        }
+        .btn {
+            padding: 8px 22px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            transition: background 0.18s, color 0.18s, border 0.18s;
+        }
+        /* Styles for appointment.html */
+.appointments-container {
+    padding: 20px;
+}
+
+.appointment-filters {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.appointment-filters select, 
+.appointment-filters input {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.appointment-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-cancel {
+    background-color: #fff3cd;
+    color: #d39e00;
+}
+
+.btn-delete {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+        .btn-outline {
+            background: #fff;
+            color: #3498db;
+            border: 2px solid #3498db;
+        }
+        .btn-outline:hover {
+            background: #3498db;
+            color: #fff;
+        }
+        @media (max-width: 900px) {
+            .main-content {
+                margin-left: 0;
+                padding: 24px 8px;
+            }
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                padding-top: 0;
+                box-shadow: none;
+            }
+            .nav-item {
+                flex: 1;
+                justify-content: center;
+                border-left: none;
+                border-bottom: 4px solid transparent;
+            }
+            .nav-item.active, .nav-item:hover {
+                border-bottom: 4px solid #3498db;
+                border-left: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="logo">
+            <i class="fas fa-calendar-check"></i>
+            <span>MediSchedule</span>
+        </div>
+        <nav class="nav-menu">
+            <a href="userinterface.html" class="nav-item ">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="discussion.html" class="nav-item">
+                <i class="fas fa-comment-dots"></i>
+                <span>Chat</span>
+                
+            </a>
+            <a href="appointment.html" class="nav-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Your Appointments</span>
+            </a>
+            <a href="notification.html" class="nav-item">
+                <i class="fas fa-bell"></i>
+                <span>Notifications</span>
+             
+            </a>
+         
+            <a href="adminA.html" class="nav-item">
+                <i class="fas fa-shield-alt"></i>
+                <span >Switch <br> as administrator</span>
+            </a>
+            <a href="#" class="nav-item about-btn">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+            </a>
+          
+        </nav>
+
+      
+    </div>
+
+    <!-- Add this section in appointment.html -->
+<div class="appointments-container">
+    <h2><i class="fas fa-history"></i> Complete history of your appointments</h2>
+    
+    <div class="appointment-filters">
+        <select id="filterStatus">
+            <option value="all">All statuses</option>
+            <option value="pending">Pending</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="cancelled">Cancelled</option>
+        </select>
+        <input type="date" id="filterDate">
+    </div>
+
+    <div id="fullAppointmentsList">
+        <!-- Appointments will be loaded here -->
+    </div>
+</div>
+
+    <script>
+        const appointments = [
+            { id: 1, doctor: "Dr. Martin", date: "2023-07-21T14:00", status: "confirmed" },
+            { id: 2, doctor: "Dr. Lambert", date: "2023-07-15T10:30", status: "pending" }
+        ];
+
+        function renderAppointments(filter = 'upcoming') {
+            const container = document.getElementById('appointmentList');
+            const now = new Date();
+            const filtered = appointments.filter(app => {
+                if (filter === 'upcoming') 
+                    return app.status !== 'cancelled' && new Date(app.date) >= now;
+                if (filter === 'past') 
+                    return app.status !== 'cancelled' && new Date(app.date) < now;
+                return app.status === 'cancelled';
+            });
+
+            container.innerHTML = filtered.length ? filtered.map(app => `
+                <div class="appointment-card">
+                    <img src="https://randomuser.me/api/portraits/${app.doctor.includes('Martin') ? 'men/32' : 'women/65'}.jpg" 
+                         class="doctor-avatar">
+                    <div class="appointment-info">
+                        <h3>${app.doctor}</h3>
+                        <p>${new Date(app.date).toLocaleString('en-US')}</p>
+                        <span class="appointment-status status-${app.status}">
+                            ${app.status === 'confirmed' ? 'Confirmed' : app.status === 'pending' ? 'Pending' : 'Cancelled'}
+                        </span>
+                        ${app.status !== 'cancelled' ? `
+                        <button class="btn btn-outline" onclick="cancelAppointment(${app.id})">
+                            Cancel
+                        </button>` : ''}
+                    </div>
+                </div>
+            `).join('') : `<div style="text-align:center;color:#888;font-size:1.1em;padding:32px;">No appointments</div>`;
+        }
+
+        function cancelAppointment(id) {
+            const appointment = appointments.find(a => a.id === id);
+            if (appointment) {
+                appointment.status = 'cancelled';
+                renderAppointments(document.querySelector('.appointment-tab.active').textContent === 'Upcoming' ? 'upcoming' :
+                                   document.querySelector('.appointment-tab.active').textContent === 'Past' ? 'past' : 'cancelled');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAppointments();
+            
+            document.querySelectorAll('.appointment-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelector('.appointment-tab.active').classList.remove('active');
+                    this.classList.add('active');
+                    const filter = this.textContent === 'Upcoming' ? 'upcoming' : 
+                                  this.textContent === 'Past' ? 'past' : 'cancelled';
+                    renderAppointments(filter);
+                });
+            });
+        });
+    </script>
+      <script src="js/unifier.js"></script></body>
+</html>

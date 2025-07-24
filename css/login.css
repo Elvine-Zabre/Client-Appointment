@@ -1,0 +1,125 @@
+:root {
+    --primary:#4361ee;
+    --primary-dark: #2980b9;
+    --secondary: #2ecc71;
+    --danger: #e74c3c;
+    --light: #f8f9fa;
+    --dark: #2c3e50;
+    --gray: #95a5a6;
+    --light-gray: #ecf0f1;
+    --white: #ffffff;
+    --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-illustration {
+    flex: 1;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    display: none;
+    margin-top: 15%;
+    margin-left: 25%;
+    animation: floatAnimation 3s ease-in-out infinite;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    border-radius: 15px;
+}
+
+
+
+.login-illustration img {
+    max-width: 80%;
+    margin-bottom: 2rem;
+    
+}
+
+.illustration-text {
+    text-align: center;
+    max-width: 500px;
+ 
+}
+
+.illustration-text h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.illustration-text p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+
+a button
+{
+    flex: 1;
+    background: #95a5a6;
+   
+    display: flex;
+
+    color: var(--white);
+    display: none;
+    margin-top: 55%;
+    margin-left: 25%;
+    animation: floatAnimation 3s ease-in-out infinite;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    
+    border-radius: 15px;
+    
+}
+/* Responsive Design */
+@media (min-width: 992px) {
+    .login-illustration {
+        display: flex;
+    }
+    
+    .login-wrapper {
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+    }
+    
+    .login-container {
+        margin: 0;
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 1.5rem;
+    }
+    
+    .login-header h1 {
+        font-size: 1.3rem;
+    }
+    
+    .input-with-icon input {
+        padding: 0.8rem 1rem 0.8rem 2.5rem;
+    }
+}
+@keyframes floatAnimation
+{
+    0%
+    {
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(-10px);
+    }
+    100%
+    {
+        transform: translateY(0);
+    }
+}

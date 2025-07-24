@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussion - MediSchedule</title>
+    <link rel="stylesheet" href="css/style2.css">
+    <style>
+        :root {
+            --primary-color: #1DA1F2;
+            --background-color: #ffffff;
+            --card-color: #192734;
+            --text-color: #000000;
+            --secondary-text: #8899A6;
+            --border-color: #e4e4e4;
+            --message-bg: #f0f2f5;
+            --user-message-bg: #0084ff;
+            --user-message-text: #ffffff;
+        }
+
+
+    
+ 
+        /* Container principal */
+        .container {
+            display: flex;
+            flex: 1;
+          
+        
+        }
+
+        /* Liste des conversations */
+        .conversation-list {
+            width: 350px;
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .conversation-header {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .conversation-header h2 {
+            font-size: 20px;
+        }
+
+        .conversation-search {
+            padding: 10px 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--message-bg);
+        }
+
+        .conversation-item {
+            display: flex;
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .conversation-item:hover {
+            background-color: var(--message-bg);
+        }
+
+        .conversation-item.active {
+            background-color: #e7f3ff;
+        }
+
+        .conversation-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 12px;
+            object-fit: cover;
+        }
+
+        .conversation-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .conversation-name {
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+
+        .conversation-preview {
+            color: var(--secondary-text);
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .conversation-time {
+            font-size: 12px;
+            color: var(--secondary-text);
+        }
+
+        /* Zone de discussion */
+        .discussion-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--message-bg);
+        }
+
+        .discussion-header {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            background-color: white;
+        }
+
+        .discussion-back {
+            display: none; /* Visible seulement en mobile */
+            margin-right: 15px;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .discussion-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 12px;
+            object-fit: cover;
+        }
+
+        .discussion-name {
+            font-weight: bold;
+        }
+
+        .discussion-status {
+            font-size: 12px;
+            color: var(--secondary-text);
+        }
+
+        .messages-container {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            max-width: 70%;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 18px;
+            position: relative;
+        }
+
+        .message-incoming {
+            align-self: flex-start;
+            background-color: white;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message-outgoing {
+            align-self: flex-end;
+            background-color: var(--user-message-bg);
+            color: var(--user-message-text);
+            border-bottom-right-radius: 5px;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: var(--secondary-text);
+            text-align: right;
+            margin-top: 5px;
+        }
+
+        .message-outgoing .message-time {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .message-input-area {
+            padding: 15px;
+            background-color: white;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .message-input {
+            flex: 1;
+            padding: 12px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            resize: none;
+            max-height: 100px;
+        }
+
+        .send-button {
+            margin-left: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Style pour mobile */
+        @media (max-width: 768px) {
+            .conversation-list {
+                width: 100%;
+                display: none; /* Caché par défaut */
+            }
+
+            .conversation-list.active {
+                display: flex; /* Visible quand on veut voir la liste */
+            }
+
+            .discussion-area {
+                display: none; /* Caché par défaut */
+            }
+
+            .discussion-area.active {
+                display: flex; /* Visible quand une conversation est sélectionnée */
+            }
+
+            .discussion-back {
+                display: block;
+            }
+
+            .logo {
+                display: none;
+            }
+
+
+            .nav-item {
+                min-width: 50px;
+                padding: 15px ;
+            }
+        }
+
+       
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+     <!-- Sidebar Navigation -->
+         <div class="sidebar">
+        <div class="logo">
+            <i class="fas fa-calendar-check"></i>
+            <span>MediSchedule</span>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="userinterface.html" class="nav-item ">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="discussion.html" class="nav-item">
+                <i class="fas fa-comment-dots"></i>
+                <span>Chat</span>
+                
+            </a>
+            <a href="appointment.html" class="nav-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Your Appointments</span>
+            </a>
+            <a href="notification.html" class="nav-item">
+                <i class="fas fa-bell"></i>
+                <span>Notifications</span>
+             
+            </a>
+         
+            <a href="adminA.html" class="nav-item">
+                <i class="fas fa-shield-alt"></i>
+                <span >Switch <br> as administrator</span>
+            </a>
+            <a href="#" class="nav-item about-btn">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+            </a>
+          
+        </nav>
+    </div>
+
+    
+
+    <div class="container">
+        <!-- Liste des conversations -->
+        <div class="conversation-list active" id="conversationList">
+            <div class="conversation-header">
+                <h2>Messages</h2>
+                <i class="fas fa-edit"></i>
+            </div>
+            <div class="conversation-search">
+                <input type="text" class="search-input" placeholder="Search messages">
+            </div>
+            
+            <!-- Exemple de conversations -->
+            <div class="conversation-item active" data-conversation="1">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="conversation-avatar">
+                <div class="conversation-info">
+                    <div class="conversation-name">Dr. Sarah Johnson</div>
+                    <div class="conversation-preview">Just confirming your appointment tomorrow at 10 AM</div>
+                </div>
+                <div class="conversation-time">10:30 AM</div>
+            </div>
+            
+            <div class="conversation-item" data-conversation="2">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="conversation-avatar">
+                <div class="conversation-info">
+                    <div class="conversation-name">Nurse Mark Wilson</div>
+                    <div class="conversation-preview">Don't forget to bring your medical records</div>
+                </div>
+                <div class="conversation-time">Yesterday</div>
+            </div>
+            
+            <div class="conversation-item" data-conversation="3">
+                <img src="https://randomuser.me/api/portraits/women/68.jpg" class="conversation-avatar">
+                <div class="conversation-info">
+                    <div class="conversation-name">Reception - General Hospital</div>
+                    <div class="conversation-preview">Your prescription is ready for pickup</div>
+                </div>
+                <div class="conversation-time">Monday</div>
+            </div>
+            
+            <div class="conversation-item" data-conversation="4">
+                <img src="https://randomuser.me/api/portraits/men/75.jpg" class="conversation-avatar">
+                <div class="conversation-info">
+                    <div class="conversation-name">Dr. Robert Chen</div>
+                    <div class="conversation-preview">The test results came back normal</div>
+                </div>
+                <div class="conversation-time">Last week</div>
+            </div>
+        </div>
+
+        <!-- Zone de discussion -->
+        <div class="discussion-area" id="discussionArea">
+            <div class="discussion-header">
+                <div class="discussion-back" id="backButton">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="discussion-avatar">
+                <div>
+                    <div class="discussion-name">Dr. Sarah Johnson</div>
+                    <div class="discussion-status">Active now</div>
+                </div>
+            </div>
+            
+            <div class="messages-container">
+                <!-- Messages entrants -->
+                <div class="message message-incoming">
+                    <div class="message-text">Hello! Just confirming your appointment tomorrow at 10 AM</div>
+                    <div class="message-time">10:30 AM</div>
+                </div>
+                
+                <!-- Messages sortants -->
+                <div class="message message-outgoing">
+                    <div class="message-text">Yes, I'll be there. Thank you for the reminder!</div>
+                    <div class="message-time">10:32 AM</div>
+                </div>
+                
+                <div class="message message-incoming">
+                    <div class="message-text">Great! Please don't forget to bring your insurance card and ID.</div>
+                    <div class="message-time">10:33 AM</div>
+                </div>
+                
+                <div class="message message-outgoing">
+                    <div class="message-text">I'll make sure to have them with me. Is there anything else I need to prepare?</div>
+                    <div class="message-time">10:35 AM</div>
+                </div>
+            </div>
+            
+            <div class="message-input-area">
+                <textarea class="message-input" placeholder="Write a message..."></textarea>
+                <button class="send-button">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const conversationList = document.getElementById('conversationList');
+            const discussionArea = document.getElementById('discussionArea');
+            const backButton = document.getElementById('backButton');
+            const conversationItems = document.querySelectorAll('.conversation-item');
+            
+            // Gestion du responsive
+            function handleResponsive() {
+                if (window.innerWidth <= 768) {
+                    // Mobile: on affiche soit la liste soit la discussion
+                    conversationList.classList.add('active');
+                    discussionArea.classList.remove('active');
+                } else {
+                    // Desktop: on affiche les deux
+                    conversationList.classList.add('active');
+                    discussionArea.classList.add('active');
+                }
+            }
+            
+            // Initial setup
+            handleResponsive();
+            window.addEventListener('resize', handleResponsive);
+            
+            // Gestion du clic sur une conversation
+            conversationItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Mettre à jour l'état actif
+                    conversationItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Mettre à jour le header de la discussion avec les infos de la conversation
+                    const avatar = this.querySelector('.conversation-avatar').src;
+                    const name = this.querySelector('.conversation-name').textContent;
+                    
+                    discussionArea.querySelector('.discussion-avatar').src = avatar;
+                    discussionArea.querySelector('.discussion-name').textContent = name;
+                    
+                    // En mobile, basculer vers la vue de discussion
+                    if (window.innerWidth <= 768) {
+                        conversationList.classList.remove('active');
+                        discussionArea.classList.add('active');
+                    }
+                    
+                    // Ici, vous pourriez charger les messages de la conversation sélectionnée via AJAX
+                });
+            });
+            
+            // Bouton retour en mobile
+            backButton.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    discussionArea.classList.remove('active');
+                    conversationList.classList.add('active');
+                }
+            });
+            
+            // Gestion de l'envoi de message
+            const messageInput = document.querySelector('.message-input');
+            const sendButton = document.querySelector('.send-button');
+            
+            function sendMessage() {
+                const text = messageInput.value.trim();
+                if (text) {
+                    const messagesContainer = document.querySelector('.messages-container');
+                    const newMessage = document.createElement('div');
+                    newMessage.className = 'message message-outgoing';
+                    newMessage.innerHTML = `
+                        <div class="message-text">${text}</div>
+                        <div class="message-time">Just now</div>
+                    `;
+                    messagesContainer.appendChild(newMessage);
+                    messageInput.value = '';
+                    
+                    // Faire défiler vers le bas
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                    
+                    // Simuler une réponse après un délai
+                    setTimeout(() => {
+                        const replies = [
+                            "Thanks for your message!",
+                            "I'll get back to you soon.",
+                            "Noted. We'll discuss this during your next visit.",
+                            "Please check your email for more details."
+                        ];
+                        const randomReply = replies[Math.floor(Math.random() * replies.length)];
+                        
+                        const replyMessage = document.createElement('div');
+                        replyMessage.className = 'message message-incoming';
+                        replyMessage.innerHTML = `
+                            <div class="message-text">${randomReply}</div>
+                            <div class="message-time">Just now</div>
+                        `;
+                        messagesContainer.appendChild(replyMessage);
+                        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                    }, 1000);
+                }
+            }
+            
+            sendButton.addEventListener('click', sendMessage);
+            
+            messageInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

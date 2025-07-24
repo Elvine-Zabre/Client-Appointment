@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediSchedule - Account Creation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+</head>
+<body class="register-page">
+    <div class="register-wrapper">
+        <!-- Left side illustration -->
+        <div class="register-illustration">
+            <div class="illustration-text">
+               <p >MediSchedule helps you find specialists and book appointments online with ease.</p>
+                <p>Access a wide range of professionals in health, business, and education.</p>
+                <p>Track your upcoming appointments and receive important notifications.</p>
+            </div>
+        </div>
+
+        <!-- Registration form -->
+        <div class="register-container">
+            <div class="register-header">
+                <div class="logo">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>MediSchedule Pro</span>
+                </div>
+                <h1>Create an account</h1>
+                <p>Start your 30-day free trial</p>
+            </div>
+
+            <form class="register-form" id="registerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="firstName" placeholder="John" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="lastName" placeholder="Doe" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Professional Email</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" placeholder="john.doe@clinic.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" id="phone" placeholder="+1 555 123 4567">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="specialty">Medical Specialty</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-stethoscope"></i>
+                        <select id="specialty" required>
+                            <option value="" disabled selected>Select your specialty</option>
+                            <option value="generaliste">General Practitioner</option>
+                            <option value="dentiste">Teacher</option>
+                            <option value="dermatologue">Dermatologist</option>
+                            <option value="Business">Bussiness</option>
+                            <option value="autre">Other specialty</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" placeholder="••••••••" required>
+                            <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+                        </div>
+                        <div class="password-strength">
+                            <div class="strength-bar"></div>
+                            <span class="strength-text">Weak</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="confirmPassword" placeholder="••••••••" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group terms-group">
+                    <label class="terms-label">
+                        <input type="checkbox" id="terms" required>
+                        <span>I accept the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a></span>
+                    </label>
+                </div>
+
+                <button  type="submit" class="btn btn-primary btn-register" id="btn-register">
+                    <a href="userinterfacePro.html" style="text-decoration: none; color: white;width: 100%;">Create my account</a></span>
+                    <span class="btn-loader">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </span>
+                </button>
+
+                <div class="register-divider">
+                    <span>or</span>
+                </div>
+
+                <div class="social-register">
+                    <p>Sign up with:</p>
+                    <div class="social-buttons">
+                        <button type="button" class="btn-social google">
+                            <i class="fab fa-google"></i>
+                        </button>
+                        <button type="button" class="btn-social microsoft">
+                            <i class="fab fa-microsoft"></i>
+                        </button>
+                        <button type="button" class="btn-social apple">
+                            <i class="fab fa-apple"></i>
+                        </button>
+                    </div>
+                </div>
+
+                
+            </form>
+        </div>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    // Gestion de l'affichage du mot de passe
+    const togglePassword = document.getElementById('togglePassword');
+    if (togglePassword) {
+        togglePassword.addEventListener('click', function() {
+            const password = document.getElementById('password');
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+        });
+    }
+
+    // Validation du mot de passe en temps réel
+    const password = document.getElementById('password');
+    if (password) {
+        password.addEventListener('input', function() {
+            checkPasswordStrength(this.value);
+        });
+    }
+
+    // Gestion de la soumission du formulaire
+    const registerForm = document.getElementById('registerForm');
+    if (registerForm) {
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Afficher le loader
+            const btnRegister = document.getElementById('btn-register');
+            btnRegister.disabled = true;
+            btnRegister.querySelector('.btn-text').style.display = 'none';
+            btnRegister.querySelector('.btn-loader').style.display = 'inline-block';
+            
+            // Validation des champs
+            if (!validateForm()) {
+                hideLoader();
+                return;
+            }
+            
+            // Simuler l'enregistrement (remplacez par un appel API réel)
+            setTimeout(() => {
+                const userData = {
+                    firstName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    specialty: document.getElementById('specialty').value
+                };
+                
+                // Stocker les données utilisateur (simulation)
+                localStorage.setItem('currentUser', JSON.stringify(userData));
+                
+                // Afficher un message de succès
+                showToast(`Bienvenue ${userData.firstName} ! Votre compte a été créé.`, 'success');
+                
+                // Redirection après 2 secondes
+                setTimeout(() => {
+                    window.location.href = 'userinterfacePro.html';
+                }, 2000);
+            }, 1500);
+        });
+    }
+
+    function validateForm() {
+        // Validation basique - à compléter selon vos besoins
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        
+        if (password !== confirmPassword) {
+            showToast('Les mots de passe ne correspondent pas', 'error');
+            return false;
+        }
+        
+        if (password.length < 8) {
+            showToast('Le mot de passe doit contenir au moins 8 caractères', 'error');
+            return false;
+        }
+        
+        if (!document.getElementById('terms').checked) {
+            showToast('Vous devez accepter les conditions d\'utilisation', 'error');
+            return false;
+        }
+        
+        return true;
+    }
+
+   
+
+    function hideLoader() {
+        const btnRegister = document.getElementById('btn-register');
+        if (btnRegister) {
+            btnRegister.disabled = false;
+            btnRegister.querySelector('.btn-text').style.display = 'inline-block';
+            btnRegister.querySelector('.btn-loader').style.display = 'none';
+        }
+    }
+});
+    </script>
+
+    <script src="js/unifier.js"></script>
+</body>
+</html>

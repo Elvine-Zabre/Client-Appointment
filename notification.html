@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediSchedule - Notifications</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style2.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --primary-light: #e6ebff;
+            --text-dark: #1a2236;
+            --text-medium: #4a5568;
+            --text-light: #718096;
+            --bg-light: #f8fafc;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .main-content {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        .section-title i {
+            margin-right: 12px;
+            color: var(--primary-color);
+            font-size: 1.5em;
+        }
+        
+        .notification-list {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+        
+        .notification-card {
+            display: flex;
+            padding: 20px;
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+        }
+        
+        .notification-card:last-child {
+            border-bottom: none;
+        }
+        
+        .notification-card:hover {
+            background-color: var(--primary-light);
+        }
+        
+        .notification-card.unread {
+            background-color: rgba(67, 97, 238, 0.05);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.1em;
+            flex-shrink: 0;
+        }
+        
+        .notification-content {
+            flex: 1;
+            margin-left: 16px;
+        }
+        
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .notification-title {
+            margin: 0;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .notification-time {
+            font-size: 0.85em;
+            color: var(--text-light);
+            background: var(--bg-light);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        
+        .notification-text {
+            margin: 0;
+            color: var(--text-medium);
+            font-size: 0.95em;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+        }
+        
+        .empty-state i {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: var(--primary-light);
+        }
+        
+        .empty-state h3 {
+            color: var(--text-medium);
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                margin: 20px auto;
+            }
+            
+            .notification-card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+         <div class="sidebar">
+        <div class="logo">
+            <i class="fas fa-calendar-check"></i>
+            <span>MediSchedule</span>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="userinterface.html" class="nav-item ">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="discussion.html" class="nav-item">
+                <i class="fas fa-comment-dots"></i>
+                <span>Chat</span>
+                
+            </a>
+            <a href="appointment.html" class="nav-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Your Appointments</span>
+            </a>
+            <a href="notification.html" class="nav-item">
+                <i class="fas fa-bell"></i>
+                <span>Notifications</span>
+             
+            </a>
+         
+            <a href="adminA.html" class="nav-item">
+                <i class="fas fa-shield-alt"></i>
+                <span >Switch <br> as administrator</span>
+            </a>
+            <a href="#" class="nav-item about-btn">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+            </a>
+          
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <div class="section-title">
+            <i class="fas fa-bell"></i>
+            <h2>Notifications</h2>
+        </div>
+
+        <div class="notification-list" id="notificationList">
+            <!-- Notifications will be rendered here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        const notifications = [
+            { 
+                id: 1, 
+                title: "New message", 
+                content: "You have received a new message from Dr. Martin regarding your upcoming appointment.", 
+                time: "10:30", 
+                read: false,
+                icon: "comment-medical"
+            },
+            { 
+                id: 2, 
+                title: "Appointment reminder", 
+                content: "You have an appointment tomorrow at 2:00 PM for your annual checkup.", 
+                time: "Yesterday", 
+                read: true,
+                icon: "calendar-check"
+            },
+            { 
+                id: 3, 
+                title: "Test results available", 
+                content: "Your test results are now available in your patient portal.", 
+                time: "Monday", 
+                read: true,
+                icon: "file-medical"
+            }
+        ];
+
+        function renderNotifications() {
+            const container = document.getElementById('notificationList');
+            
+            if (notifications.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-bell-slash"></i>
+                        <h3>No notifications</h3>
+                        <p>You don't have any notifications at this time</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = notifications.map(notif => `
+                <div class="notification-card ${notif.read ? '' : 'unread'}" data-id="${notif.id}">
+                    <div class="notification-icon">
+                        <i class="fas fa-${notif.icon}"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h3 class="notification-title">${notif.title}</h3>
+                            <span class="notification-time">${notif.time}</span>
+                        </div>
+                        <p class="notification-text">${notif.content}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            document.querySelectorAll('.notification-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const notifId = parseInt(this.getAttribute('data-id'));
+                    const notification = notifications.find(n => n.id === notifId);
+                    if (notification && !notification.read) {
+                        notification.read = true;
+                        renderNotifications();
+                        // Here you could add an API call to mark the notification as read
+                    }
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', renderNotifications);
+    </script>
+    <script src="js/unifier.js"></script>
+</body>
+</html>

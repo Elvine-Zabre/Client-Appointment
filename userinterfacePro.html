@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediSchedule - Book an Appointment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style2.css">
+    
+</head>
+<body>
+   
+    <!-- Sidebar Navigation -->
+    
+    <div class="sidebar">
+        <div class="logo">
+            <i class="fas fa-calendar-check"></i>
+            <span>MediSchedule</span>
+        </div>
+
+      
+
+        <nav class="nav-menu">
+            <a href="userinterface.html" class="nav-item ">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="discussion.html" class="nav-item">
+                <i class="fas fa-comment-dots"></i>
+                <span>Chat</span>
+                
+            </a>
+            <a href="appointment.html" class="nav-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Your Appointments</span>
+            </a>
+            <a href="notification.html" class="nav-item">
+                <i class="fas fa-bell"></i>
+                <span>Notifications</span>
+             
+            </a>
+            <a href="profil.html" class="nav-item">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+            <a href="adminA.html" class="nav-item">
+                <i class="fas fa-shield-alt"></i>
+                <span style="text-align: center;">Switch as administrator</span>
+            </a>
+            <a href="#" class="nav-item about-btn">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+            </a>
+            <a href="index.html" class="nav-item logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search for a specialist, a specialty...">
+        </div>
+
+        <!-- Urgent Alert -->
+        <div class="urgent-alert">
+            <i class="fas fa-exclamation-circle"></i>
+            <div class="urgent-content">
+                <h4>Last minute cancellation</h4>
+                <p>A slot has opened with Dr. Martin (Dentist) tomorrow at 9am</p>
+            </div>
+        </div>
+
+        <!-- Category Tabs -->
+        <div class="category-tabs">
+            <div class="tab active">Health</div>
+            <div class="tab">Business</div>
+            <div class="tab">Education</div>
+            <div class="tab">More</div>
+        </div>
+
+        <!-- Upcoming Appointments -->
+        <div class="upcoming-appointments">
+            <h2 class="section-title">
+                <i class="fas fa-calendar-day"></i>
+                <span>Your upcoming appointments</span>
+            </h2>
+            
+            <div id="appointmentsList">
+                <!-- Appointments will be added here dynamically -->
+            </div>
+            
+            <div class="no-appointments" id="noAppointmentsMessage">
+                <i class="far fa-calendar-times"></i>
+                <p>You have no upcoming appointments</p>
+            </div>
+        </div>
+
+        <!-- Specialists Grid -->
+        <h2 class="section-title" style="margin-top: 2rem;">
+            <i class="fas fa-user-md"></i>
+            <span>Available specialists</span>
+        </h2>
+
+        <div class="specialists-grid">
+            <!-- Specialist 1 -->
+            <div class="specialist-card">
+                <div class="specialist-header">
+                    <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Specialist" class="specialist-avatar">
+                </div>
+                <div class="specialist-body">
+                    <h3 class="specialist-name">Dr. Helena Dupont</h3>
+                    <p class="specialist-specialty">Dermatologist</p>
+                    <div class="specialist-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>4.7</span>
+                    </div>
+                    <span class="specialist-badge">Available today</span>
+                    <div class="availability">
+                        <div class="availability-badge available"></div>
+                        <div class="availability-badge available"></div>
+                        <div class="availability-badge available"></div>
+                        <div class="availability-badge unavailable"></div>
+                        <div class="availability-badge available"></div>
+                    </div>
+                    <button class="btn btn-primary">Book an appointment</button>
+                </div>
+            </div>
+
+            <!-- Specialist 2 -->
+            <div class="specialist-card">
+                <div class="specialist-header">
+                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Specialist" class="specialist-avatar">
+                </div>
+                <div class="specialist-body">
+                    <h3 class="specialist-name">Sadiata Bougma</h3>
+                    <p class="specialist-specialty">IT Specialist</p>
+                    <div class="specialist-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span>5.0</span>
+                    </div>
+                    <span class="specialist-badge">Online now</span>
+                    <div class="availability">
+                        <div class="availability-badge available"></div>
+                        <div class="availability-badge available"></div>
+                        <div class="availability-badge available"></div>
+                        <div class="availability-badge available"></div>
+                        <div class="availability-badge available"></div>
+                    </div>
+                    <button class="btn btn-primary">Book an appointment</button>
+                </div>
+            </div>
+
+            <!-- Specialist 3 -->
+            <div class="specialist-card">
+                <div class="specialist-header">
+                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Specialist" class="specialist-avatar">
+                </div>
+                <div class="specialist-body">
+                    <h3 class="specialist-name">Cédric Yameogo</h3>
+                    <p class="specialist-specialty">IT Specialist</p>
+                    <div class="specialist-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span>4.2</span>
+                    </div>
+                    <span class="specialist-badge">Available tomorrow</span>
+                    <div class="availability">
+                        <div class="availability-badge unavailable"></div>
+                        <div class="availability-badge available"></div>
+                        <div class="availability-badge available"></div>
+                        <div class="availability-badge available"></div>
+                        <div class="availability-badge available"></div>
+                    </div>
+                    <button class="btn btn-primary">Book an appointment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Appointment Form Modal -->
+    <div class="appointment-modal" id="appointmentModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2><i class="fas fa-calendar-plus"></i> New appointment</h2>
+            
+            <form id="appointmentForm">
+                <div class="form-group">
+                    <label for="appointmentSpecialist">Specialist</label>
+                    <input type="text" id="appointmentSpecialist" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label for="appointmentDate">Date</label>
+                    <input type="date" id="appointmentDate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="appointmentTime">Time</label>
+                    <select id="appointmentTime" required>
+                        <option value="">-- Select --</option>
+                        <option value="08:00">08:00</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="appointmentReason">Reason</label>
+                    <textarea id="appointmentReason" rows="3" required placeholder="Briefly describe the reason for your appointment..."></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary close-modal-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/unifier.js"></script>
+</body>
+</html>
